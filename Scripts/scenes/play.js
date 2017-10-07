@@ -49,6 +49,8 @@ var scenes;
                 this.addChild(this._clouds[count]);
             }
         };
+        Play.prototype._checkCollision = function () {
+        };
         return Play;
     }(objects.Scene));
     scenes.Play = Play;

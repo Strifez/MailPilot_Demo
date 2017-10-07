@@ -56,5 +56,10 @@ module scenes {
       }
 
     }
+
+    private _checkCollision(){
+      
+    }
+
   }
 }
