@@ -12,10 +12,11 @@ var objects;
 (function (objects) {
     var Island = /** @class */ (function (_super) {
         __extends(Island, _super);
+        // PRIVATE INSTANCE VARIABLES
         // PUBLIC PROPERTIES
         // CONSTRUCTORS
         function Island(assetManager) {
-            var _this = _super.call(this, assetManager.getResult("island")) || this;
+            var _this = _super.call(this, assetManager, "island") || this;
             _this.Start();
             return _this;
         }
@@ -31,21 +32,20 @@ var objects;
         };
         // PUBLIC METHODS
         Island.prototype.Start = function () {
-            this.width = this.getBounds().width;
-            this.height = this.getBounds().height;
-            this.halfWidth = this.width * 0.5;
-            this.halfHeight = this.height * 0.5;
-            this.regX = this.halfWidth;
-            this.regY = this.halfHeight;
-            this._verticalSpeed = 5;
+            this.verticalSpeed = 5;
             this._reset();
         };
+        Island.prototype._updatePosition = function () {
+            this.y += this.verticalSpeed;
+            this.position.x = this.x;
+            this.position.y = this.y;
+        };
         Island.prototype.Update = function () {
-            this.y += this._verticalSpeed;
+            this._updatePosition();
             this._checkBounds();
         };
         return Island;
-    }(createjs.Bitmap));
+    }(objects.GameObject));
     objects.Island = Island;
 })(objects || (objects = {}));
 //# sourceMappingURL=island.js.map

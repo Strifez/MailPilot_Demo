@@ -32,11 +32,14 @@ var scenes;
             this.Main();
         };
         Play.prototype.Update = function () {
+            var _this = this;
             this._plane.Update();
             this._ocean.Update();
             this._island.Update();
+            this._checkCollision(this._island);
             this._clouds.forEach(function (cloud) {
                 cloud.Update();
+                _this._checkCollision(cloud);
             });
             return this._currentScene;
         };
@@ -49,7 +52,20 @@ var scenes;
                 this.addChild(this._clouds[count]);
             }
         };
-        Play.prototype._checkCollision = function () {
+        // compare the distance between P1 and P2 is less than half the height of each object
+        Play.prototype._checkCollision = function (other) {
+            var P1 = new createjs.Point(this._plane.x, this._plane.y);
+            var P2 = other.position;
+            if ((Math.sqrt(Math.pow(P2.x - P1.x, 2) + Math.pow(P2.y - P1.y, 2))) <
+                (this._plane.halfHeight + other.halfHeight)) {
+                if (!other.isColliding) {
+                    console.log("Collision! with " + other.name);
+                    other.isColliding = true;
+                }
+            }
+            else {
+                other.isColliding = false;
+            }
         };
         return Play;
     }(objects.Scene));

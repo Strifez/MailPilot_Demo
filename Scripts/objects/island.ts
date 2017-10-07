@@ -1,16 +1,12 @@
 module objects {
-  export class Island extends createjs.Bitmap {
+  export class Island extends objects.GameObject {
     // PRIVATE INSTANCE VARIABLES
-    width:number;
-    height:number;
-    halfWidth:number;
-    halfHeight:number;
-    private _verticalSpeed:number;
+
     // PUBLIC PROPERTIES
 
     // CONSTRUCTORS
     constructor(assetManager: createjs.LoadQueue) {
-      super(assetManager.getResult("island"));
+      super(assetManager,"island");
 
       this.Start();
     }
@@ -28,18 +24,18 @@ module objects {
 
     // PUBLIC METHODS
     public Start():void {
-      this.width = this.getBounds().width;
-      this.height = this.getBounds().height;
-      this.halfWidth = this.width * 0.5;
-      this.halfHeight = this.height * 0.5;
-      this.regX = this.halfWidth;
-      this.regY = this.halfHeight;
-      this._verticalSpeed = 5;
+      this.verticalSpeed = 5;
       this._reset();
     }
 
+    private _updatePosition (){
+      this.y += this.verticalSpeed;
+      this.position.x = this.x;
+      this.position.y = this.y;
+    }
+
     public Update():void {
-      this.y += this._verticalSpeed;
+      this._updatePosition();
       this._checkBounds();
     }
   }
