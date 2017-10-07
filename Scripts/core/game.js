@@ -10,7 +10,10 @@
         { id: "plane", src: "../../Assets/images/plane.png" },
         { id: "island", src: "../../Assets/images/island.png" },
         { id: "cloud", src: "../../Assets/images/cloud.png" },
-        { id: "ocean", src: "../../Assets/images/ocean.gif" }
+        { id: "ocean", src: "../../Assets/images/ocean.gif" },
+        { id: "engine", src: "../../Assets/audio/engine.ogg" },
+        { id: "thunder", src: "../../Assets/audio/thunder.ogg" },
+        { id: "yay", src: "../../Assets/audio/yay.ogg" }
     ];
     var currentScene;
     var currentState;

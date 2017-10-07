@@ -24,18 +24,21 @@ var scenes;
         // PRIVATE METHODS
         // PUBLIC METHODS
         End.prototype.Start = function () {
-            this._gameOverLabel = new objects.Label("Game Over", "40px", "Consolas", "#000000", 320, 240, true);
-            this._backButton = new objects.Button(this._assetManager, "backButton", 320, 340, true);
+            this._ocean = new objects.Ocean(this._assetManager);
+            this._gameOverLabel = new objects.Label("Game Over", "80px", "Dock51", "#FFFF00", 320, 240, true);
+            this._restartButton = new objects.Button(this._assetManager, "backButton", 320, 340, true);
             this.Main();
         };
         End.prototype.Update = function () {
+            this._ocean.Update();
             return this._currentScene;
         };
         End.prototype.Main = function () {
             var _this = this;
+            this.addChild(this._ocean);
             this.addChild(this._gameOverLabel);
-            this.addChild(this._backButton);
-            this._backButton.on("click", function () {
+            this.addChild(this._restartButton);
+            this._restartButton.on("click", function () {
                 _this._currentScene = config.PLAY;
                 _this.removeAllChildren();
             });

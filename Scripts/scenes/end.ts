@@ -3,8 +3,10 @@ module scenes {
     // PRIVATE INSTANCE VARIABLES
     private _assetManager:createjs.LoadQueue;
 
+    private _ocean: objects.Ocean;
+
     private _gameOverLabel:objects.Label;
-    private _backButton:objects.Button;
+    private _restartButton:objects.Button;
 
     // PUBLIC PROPERTIES
 
@@ -19,23 +21,24 @@ module scenes {
 
     // PUBLIC METHODS
     public Start():void {
-      this._gameOverLabel = new objects.Label("Game Over", "40px", "Consolas", "#000000", 320, 240, true);
-      this._backButton = new objects.Button(this._assetManager, "backButton", 320, 340, true);
+      this._ocean = new objects.Ocean(this._assetManager);
+      this._gameOverLabel = new objects.Label("Game Over", "80px", "Dock51", "#FFFF00", 320, 240, true);
+      this._restartButton = new objects.Button(this._assetManager, "backButton", 320, 340, true);
       this.Main();
     }
 
     public Update():number {
+      this._ocean.Update();
       return this._currentScene;
     }
 
     public Main():void {
 
+      this.addChild(this._ocean);
       this.addChild(this._gameOverLabel);
+      this.addChild(this._restartButton);
 
-
-      this.addChild(this._backButton);
-
-      this._backButton.on("click", () => {
+      this._restartButton.on("click", () => {
         this._currentScene = config.PLAY;
         this.removeAllChildren();
       });
